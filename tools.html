@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salamanca-专业出海广告创意制作团队</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <script src="./files/portfolio-data-tools.js"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Noto Sans SC", "Source Han Sans SC", sans-serif;
+        background-color: #000610;
+        color: #ffffff;
+      }
+
+      .header-hidden {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .header-visible {
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .blob-1 {
+        width: 400px;
+        height: 400px;
+        background: #f59e0b;
+        top: 10%;
+        left: 10%;
+      }
+
+      .blob-2 {
+        width: 300px;
+        height: 300px;
+        background: #3b82f6;
+        bottom: 10%;
+        right: 10%;
+      }
+
+      .section-title {
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background: #f59e0b;
+      }
+
+      .title-decoration {
+        font-size: 0.8rem;
+        color: #f59e0b;
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+      }
+      /* 瀑布流布局 */
+      .masonry-grid {
+        column-count: 2;
+        column-gap: 0.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .masonry-grid {
+          column-count: 3;
+          column-gap: 1.5rem;
+        }
+      }
+
+      .portfolio-item {
+        margin-bottom: 0.5rem;
+        break-inside: avoid;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .portfolio-item:hover {
+        transform: translateY(-5px);
+      }
+
+      /* 媒体容器优化 - 确保完整显示 */
+      .media-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        background-color: #1a1a1a; /* 加载时的背景色 */
+      }
+
+      /* 图片自适应 */
+      .media-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover; /* 保持比例并填充容器 */
+      }
+
+      /* 播放按钮 */
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+      }
+
+      .portfolio-item:hover .play-button {
+        opacity: 1;
+        background: rgba(59, 130, 246, 0.8);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      /* 加载指示器 */
+      .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        z-index: 5;
+      }
+
+      /* 详情弹窗样式 */
+      .modal-container {
+        max-height: 85vh;
+        margin: 1rem;
+        overflow-y: auto;
+        width: calc(100vw - 2rem);
+        background-color: #1a1a1a;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .modal-container {
+          width: auto;
+          max-width: 90vw;
+          height: 85vh;
+        }
+      }
+
+      .modal-media-container {
+        max-height: 60vh;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        background-color: #1a1a1a;
+      }
+
+      .modal-media-container img,
+      .modal-media-container video {
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        object-fit: contain;
+      }
+
+      /* 保护层 */
+      .protection-overlay {
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header
+      id="header"
+      class="fixed top-0 w-full bg-[#000610] bg-opacity-90 backdrop-blur-md z-50 header-hidden">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex items-center">
+          <img
+            src="./files/picture/Salamanca-03.png"
+            alt="Salamanca Design"
+            class="h-10" />
+        </a>
+
+        <!-- 导航菜单 -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="index.html#services"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            服务
+          </a>
+          <a
+            href="index.html#pricing"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            报价
+          </a>
+          <a
+            href="index.html#why-us"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            关于我们
+          </a>
+          <div class="relative group">
+            <button
+              class="text-gray-300 hover:text-yellow-400 font-medium flex items-center transition duration-300">
+              行业案例
+              <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <div
+              class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <a
+                href="bc.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                游戏
+              </a>
+              <a
+                href="finance.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                金融
+              </a>
+              <a
+                href="dating.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                交友
+              </a>
+              <a
+                href="crypto.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                加密
+              </a>
+              <a
+                href="tools.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                工具
+              </a>
+              <a
+                href="commodity.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                电商
+              </a>
+            </div>
+          </div>
+          <a
+            href="index.html#contact"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            联系我们
+          </a>
+        </nav>
+
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-300">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单 -->
+      <div
+        id="mobile-menu"
+        class="md:hidden bg-gray-800 py-2 px-4 shadow-lg hidden">
+        <a href="index.html#services" class="block py-2 text-gray-300">服务</a>
+        <a href="index.html#pricing" class="block py-2 text-gray-300">报价</a>
+        <a href="index.html#why-us" class="block py-2 text-gray-300">
+          关于我们
+        </a>
+        <a href="index.html#portfolio" class="block py-2 text-gray-300">
+          行业案例
+        </a>
+        <a href="index.html#contact" class="block py-2 text-gray-300">
+          联系我们
+        </a>
+      </div>
+    </header>
+
+    <section id="about" class="py-20 bg-[#000610] relative overflow-hidden">
+      <div class="blob blob-2" style="left: 5%; top: 20%"></div>
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">PORTFOLIO</p>
+          <h2 class="text-3xl font-bold section-title">工具类素材</h2>
+        </div>
+        <!-- 瀑布流布局 -->
+        <div id="portfolio-container" class="masonry-grid">
+          <!-- 作品将动态加载到这里 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 作品详情弹窗 -->
+    <div
+      id="portfolioModal"
+      class="fixed inset-0 bg-black bg-opacity-90 backdrop-blur-lg flex items-center justify-center z-50 hidden">
+      <div class="modal-container">
+        <div class="flex justify-between items-center mb-4">
+          <h3 id="modal-title" class="text-2xl font-bold"></h3>
+          <button
+            onclick="closePortfolioModal()"
+            class="text-gray-400 hover:text-white">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div id="modal-content" class="space-y-4">
+          <!-- 弹窗内容将动态加载到这里 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-[#000610] text-white py-8 border-t border-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-center items-center">
+          <div class="mb-4 md:mb-0 text-center">
+            <p class="text-lg">© 2025 Salamanca. All Rights Reserved.</p>
+            <p class="text-gray-400 mt-2">
+              专业出海广告内容制作 | 图片 · 视频 · 动画 · 落地页 · 真人拍摄 ·
+              KOL
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 导航栏滚动显示/隐藏
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        if (window.scrollY > 100) {
+          header.classList.remove("header-hidden");
+          header.classList.add("header-visible");
+        } else {
+          header.classList.remove("header-visible");
+          header.classList.add("header-hidden");
+        }
+      });
+      // 移动端菜单切换
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobile-menu");
+          mobileMenu.classList.toggle("hidden");
+        });
+
+      // 添加保护层，禁止右键和拖拽
+      function addProtectionLayers() {
+        document
+          .querySelectorAll(".media-container, .modal-media-container")
+          .forEach((container) => {
+            if (!container.querySelector(".protection-overlay")) {
+              const overlay = document.createElement("div");
+              overlay.className = "protection-overlay";
+              overlay.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                cursor: default;
+            `;
+              container.style.position = "relative";
+              container.appendChild(overlay);
+            }
+          });
+      }
+
+      // 图片懒加载
+      function setupLazyLoading() {
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                const src = img.getAttribute("data-src");
+                if (src) {
+                  img.src = src;
+                  img.classList.remove("lazy");
+                  img.classList.add("loaded");
+                  obs.unobserve(img);
+                }
+              }
+            });
+          });
+          document
+            .querySelectorAll("img.lazy")
+            .forEach((img) => observer.observe(img));
+        } else {
+          // 兼容方案
+          document.querySelectorAll("img.lazy").forEach((img) => {
+            const src = img.getAttribute("data-src");
+            if (src) img.src = src;
+          });
+        }
+      }
+
+      // 渲染作品
+      function renderPortfolio() {
+        const container = document.getElementById("portfolio-container");
+        container.innerHTML = "";
+
+        portfolioData.forEach((item) => {
+          const projectElement = document.createElement("div");
+          projectElement.className = "portfolio-item";
+          projectElement.onclick = () => openPortfolioModal(item);
+
+          const imgSrc =
+            item.mediaType === "video"
+              ? item.posterUrl || item.mediaUrl
+              : item.mediaUrl;
+
+          projectElement.innerHTML = `
+            <div class="media-container">
+                <img data-src="${imgSrc}" alt="${
+            item.title
+          }" class="w-full h-auto lazy">
+                ${
+                  item.mediaType === "video"
+                    ? `
+                <div class="play-button">
+                    <i class="fas fa-play text-white text-xl"></i>
+                </div>`
+                    : ""
+                }
+            </div>
+        `;
+
+          container.appendChild(projectElement);
+        });
+
+        setupLazyLoading();
+      }
+
+      // 打开作品详情弹窗
+      function openPortfolioModal(item) {
+        document.getElementById("modal-title").textContent = item.title;
+
+        let mediaHTML = "";
+        if (item.mediaType === "video") {
+          mediaHTML = `
+            <div class="modal-media-container relative">
+                <video controls class="w-full h-auto" poster="${
+                  item.posterUrl || ""
+                }" preload="metadata">
+                    <source src="${item.mediaUrl}" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+        `;
+        } else {
+          mediaHTML = `<div class="modal-media-container"><img src="${item.mediaUrl}" alt="${item.title}"></div>`;
+        }
+
+        const tagsHTML = item.tags
+          .map(
+            (tag) =>
+              `<span class="bg-gray-800 px-3 py-1 rounded-full text-sm">${tag}</span>`
+          )
+          .join("");
+
+        document.getElementById("modal-content").innerHTML = `
+        ${mediaHTML}
+        <div>
+            <h4 class="text-lg font-semibold mb-2">项目详情</h4>
+            <p class="text-gray-300">${item.fullDescription}</p>
+        </div>
+        <div>
+            <h4 class="text-lg font-semibold mb-2">标签</h4>
+            <div class="flex flex-wrap gap-2">${tagsHTML}</div>
+        </div>
+    `;
+
+        document.getElementById("portfolioModal").classList.remove("hidden");
+        setTimeout(addProtectionLayers, 100);
+      }
+
+      // 关闭作品详情弹窗
+      function closePortfolioModal() {
+        document.getElementById("portfolioModal").classList.add("hidden");
+        const video = document.querySelector("#portfolioModal video");
+        if (video) video.pause();
+      }
+
+      // DOM加载完成后初始化
+      document.addEventListener("DOMContentLoaded", function () {
+        renderPortfolio();
+      });
+    </script>
+  </body>
+</html>
