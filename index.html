@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salamanca-专业出海广告创意制作团队</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Noto Sans SC", "Source Han Sans SC", sans-serif;
+        background-color: #000610;
+        color: #ffffff;
+      }
+
+      .header-hidden {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .header-visible {
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 38, 255, 0.049);
+        z-index: 1;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #000610 0%, #0a0a0a 100%);
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .blob-1 {
+        width: 400px;
+        height: 400px;
+        background: #f59e0b;
+        top: 10%;
+        left: 10%;
+      }
+
+      .blob-2 {
+        width: 300px;
+        height: 300px;
+        background: #3b82f6;
+        bottom: 10%;
+        right: 10%;
+      }
+
+      .section-title {
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background: #f59e0b;
+      }
+
+      .service-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .service-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .pricing-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .process-step {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .faq-item {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .contact-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .content-wrapper {
+        position: relative;
+        z-index: 1;
+      }
+
+      .title-decoration {
+        font-size: 0.8rem;
+        color: #f59e0b;
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <header
+      id="header"
+      class="fixed top-0 w-full bg-[#000610] bg-opacity-90 backdrop-blur-md z-50 header-hidden">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex items-center">
+          <img
+            src="./files/picture/Salamanca-03.png"
+            alt="Salamanca Design"
+            class="h-10" />
+        </a>
+
+        <!-- 导航菜单 -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#services"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            服务
+          </a>
+          <a
+            href="#pricing"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            报价
+          </a>
+          <a
+            href="#why-us"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            关于我们
+          </a>
+          <div class="relative group">
+            <button
+              class="text-gray-300 hover:text-yellow-400 font-medium flex items-center transition duration-300">
+              行业案例
+              <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            </button>
+            <div
+              class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <a
+                href="bc.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                游戏
+              </a>
+              <a
+                href="finance.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                金融
+              </a>
+              <a
+                href="dating.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                交友
+              </a>
+              <a
+                href="crypto.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                加密
+              </a>
+              <a
+                href="tools.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                工具
+              </a>
+              <a
+                href="commodity.html"
+                class="block px-4 py-2 text-gray-300 hover:bg-gray-700">
+                电商
+              </a>
+            </div>
+          </div>
+          <a
+            href="#contact"
+            class="text-gray-300 hover:text-yellow-400 font-medium transition duration-300">
+            联系我们
+          </a>
+        </nav>
+
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-300">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- 移动端菜单 -->
+      <div
+        id="mobile-menu"
+        class="md:hidden bg-gray-800 py-2 px-4 shadow-lg hidden">
+        <a href="#services" class="block py-2 text-gray-300">服务</a>
+        <a href="#pricing" class="block py-2 text-gray-300">报价</a>
+        <a href="#why-us" class="block py-2 text-gray-300">关于我们</a>
+        <a href="#portfolio" class="block py-2 text-gray-300">行业案例</a>
+        <a href="#contact" class="block py-2 text-gray-300">联系我们</a>
+      </div>
+    </header>
+
+    <!-- 首屏 -->
+    <section
+      class="min-h-screen gradient-bg flex flex-col justify-center items-center text-white px-4 relative overflow-hidden">
+      <video class="video-background" autoplay muted loop playsinline>
+        <source src="./files/picture/background-video.mp4" type="video/mp4" />
+      </video>
+
+      <!-- 视频叠加层，增强文本可读性 -->
+      <div class="video-overlay"></div>
+
+      <div
+        class="container mx-auto flex flex-col items-center text-center content-wrapper">
+        <img
+          src="./files/picture/Salamanca-01.png"
+          alt="Salamanca Design"
+          class="w-64 mb-8" />
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          <span class="text-yellow-400 shadow-2xl">
+            专业出海广告创意制作团队
+          </span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 max-w-3xl shadow-2xl">
+          图片 · 视频 · 动画 · 落地页 · 真人拍摄 · KOL合作
+        </p>
+        <a
+          href="https://t.me/Salamanca888"
+          target="_blank"
+          class="shadow-2xl bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-500 transition duration-300 z-10">
+          立即合作
+        </a>
+      </div>
+    </section>
+
+    <!-- 我们是谁 -->
+    <section id="about" class="py-20 bg-[#000610] relative overflow-hidden">
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">ABOUT US</p>
+          <h2 class="text-3xl font-bold section-title">我们是谁</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-lg text-gray-300 text-center">
+          <p class="mb-4">
+            Salamanca Design 是一支拥有超过 10
+            年出海广告经验的创意团队。我们服务过众多大型产品和知名品牌，结合丰富的投放经验与本地化制作能力，将每一次创意打磨为可量化的广告转化。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我们的服务 -->
+    <section id="services" class="py-20 bg-[#000610] text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <p class="title-decoration">OUR SERVICES</p>
+          <h2 class="text-3xl font-bold section-title">我们的服务</h2>
+        </div>
+        <p class="text-center text-gray-400 max-w-3xl mx-auto mb-12">
+          每项服务都强调“为广告投放而生”，以提升点击率与转化率为首要目标。
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-image text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">广告图制作</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                为 Google、Meta
+                等大媒体广告平台量身设计视觉素材，兼顾多语言本地化和 A/B
+                测试。每张图片均以提升点击率和转化率为核心指标，通过数据反馈不断迭代
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-video text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">动画与视频</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                提供专业动画制作、视频剪辑和 AI
+                数字人配音服务，专注于大媒体广告首屏吸引力和用户留存。结合广告投放数据反馈迭代素材，优化转化效果与
+                ROI
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-user text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">真人广告拍摄</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                全球本地化团队进行广告实拍，提供剧本、演员、翻译及后期一站式服务。内容针对各地文化和广告审查优化，配合大媒体投放数据，提升素材转化效果
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-globe text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">落地页制作</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                针对广告投放制作高转化落地页，支持多语言与地域跳转。设计和布局经过大数据分析优化，确保广告流量有效转化为潜在用户或订单
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-bullhorn text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">KOL推广</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                利用东南亚、中东、欧美、拉美等地区达人资源，进行脚本指导和投放配合。结合广告数据分析选择最优达人，提高品牌曝光和广告转化率
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 报价参考 -->
+    <section id="pricing" class="py-20 bg-[#000610] relative overflow-hidden">
+      <div class="blob blob-1" style="left: 80%; top: 10%"></div>
+
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">PRICING</p>
+          <h2 class="text-3xl font-bold section-title">报价参考</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto pricing-card p-8 text-xs md:text-lg">
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead class="bg-yellow-500 bg-opacity-20 text-white">
+                <tr>
+                  <th class="py-4 px-6 text-left">行业</th>
+                  <th class="py-4 px-6 text-left">服务</th>
+                  <th class="py-4 px-6 text-left">单价</th>
+                  <th class="py-4 px-6 text-left">服务</th>
+                  <th class="py-4 px-6 text-left">单价</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-300">
+                <tr class="border-b border-gray-700">
+                  <td class="py-4 px-6">游戏</td>
+                  <td class="py-4 px-6">图片</td>
+                  <td class="py-4 px-6">￥20</td>
+                  <td class="py-4 px-6">视频</td>
+                  <td class="py-4 px-6">￥10</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="py-4 px-6">金融</td>
+                  <td class="py-4 px-6">图片</td>
+                  <td class="py-4 px-6">￥30</td>
+                  <td class="py-4 px-6">视频</td>
+                  <td class="py-4 px-6">￥50</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="py-4 px-6">交友类</td>
+                  <td class="py-4 px-6">图片</td>
+                  <td class="py-4 px-6">￥10</td>
+                  <td class="py-4 px-6">视频</td>
+                  <td class="py-4 px-6">￥20</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-6">落地页</td>
+                  <td class="py-4 px-6">设计</td>
+                  <td class="py-4 px-6">￥400</td>
+                  <td class="py-4 px-6">部署+域名</td>
+                  <td class="py-4 px-6">￥500/月</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto mt-6 text-center text-gray-400">
+          <p>支持长期包月、批量折扣。所有价格可根据项目复杂度与地域作微调。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 优势 -->
+    <section id="why-us" class="py-20 relative overflow-hidden">
+      <div class="blob blob-2" style="left: 5%; top: 20%"></div>
+
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">WHY CHOOSE US</p>
+          <h2 class="text-3xl font-bold section-title">优势</h2>
+        </div>
+
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex items-start">
+            <div class="text-3xl mr-4 text-yellow-400">🌎</div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">出海经验</h3>
+              <p class="text-gray-400">
+                十年海外投放与本地化制作实践，熟悉各平台素材规范和用户喜好。
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="text-3xl mr-4 text-yellow-400">📈</div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">数据导向</h3>
+              <p class="text-gray-400">
+                素材A/B与投放回收数据支持，持续优化转化。
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="text-3xl mr-4 text-yellow-400">🧑</div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">一站式团队</h3>
+              <p class="text-gray-400">
+                真人拍摄从创意到交付（文案、设计、拍摄、技术部署）协同交付。
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="text-3xl mr-4 text-yellow-400">🔁</div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">灵活结算</h3>
+              <p class="text-gray-400">
+                支持U支付，素材先用后付（次月月底结账）。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 行业案例 -->
+    <section id="portfolio" class="py-20 bg-[#000610] relative overflow-hidden">
+      <div class="blob blob-1" style="left: 70%; top: 30%"></div>
+
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">PORTFOLIO</p>
+          <h2 class="text-3xl font-bold section-title">行业案例</h2>
+        </div>
+
+        <div
+          class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="bc.html" class="service-card block">
+            <div
+              class="service-image"
+              style="background-image: url('files/picture/00018.webp')"></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">游戏类素材</h3>
+              <p class="text-gray-400">查看我们的游戏行业广告案例</p>
+            </div>
+          </a>
+
+          <a href="finance.html" class="service-card block">
+            <div
+              class="service-image"
+              style="
+                background-image: url('files/picture/task_01k8sv94ytegvrepmysf2a6p8s_1761804134_src_0.webp');
+              "></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">金融类素材</h3>
+              <p class="text-gray-400">金融类广告素材展示</p>
+            </div>
+          </a>
+
+          <a href="dating.html" class="service-card block">
+            <div
+              class="service-image"
+              style="
+                background-image: url('files/picture/d92122c3954eb3fbd2f6167fd1fc89bc.webp');
+              "></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">社交类素材</h3>
+              <p class="text-gray-400">社交应用广告创意案例</p>
+            </div>
+          </a>
+
+          <a href="crypto.html" class="service-card block">
+            <div
+              class="service-image"
+              style="
+                background-image: url('files/picture/task_01k8svcahvfvbbf61jatjzw5yf_1761804235_src_0.webp');
+              "></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">加密类素材</h3>
+              <p class="text-gray-400">区块链与加密行业广告</p>
+            </div>
+          </a>
+
+          <a href="tools.html" class="service-card block">
+            <div
+              class="service-image"
+              style="
+                background-image: url('files/picture/task_01ka0ybtkxfsy96sc9ped5hjcr_1763115992_src_0.webp');
+              "></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">工具类素材</h3>
+              <p class="text-gray-400">实用工具应用广告案例</p>
+            </div>
+          </a>
+
+          <a href="commodity.html" class="service-card block">
+            <div
+              class="service-image"
+              style="
+                background-image: url('files/picture/shopping-bags-gift-box-with-bubbles.webp');
+              "></div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">电商类素材</h3>
+              <p class="text-gray-400">电商购物应用广告案例</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 合作流程 -->
+    <section class="py-20 bg-[#000610] text-white w-full">
+      <div class="flex flex-col md:flex-row w-full">
+        <div class="md:w-1/2 w-full relative">
+          <div
+            class="h-full w-full bg-center bg-cover"
+            style="background-image: url('./files/picture/0.webp')"></div>
+        </div>
+
+        <div
+          class="md:w-1/2 w-full bg-gray-900 p-10 flex flex-col justify-center">
+          <div class="text-center md:text-left mb-10">
+            <p class="title-decoration">WORK PROCESS</p>
+            <h2 class="text-3xl font-bold">合作流程</h2>
+          </div>
+
+          <div class="relative border-l border-yellow-500 pl-6">
+            <div class="mb-10 ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">1. 提交需求</h3>
+              <p class="text-gray-400">沟通广告类型与目标，确认初步方向</p>
+            </div>
+
+            <div class="mb-10 ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">2. 项目评估与报价</h3>
+              <p class="text-gray-400">根据类型与数量给出报价及排期</p>
+            </div>
+
+            <div class="mb-10 ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">3. 素材排期</h3>
+              <p class="text-gray-400">确认制作时间并进入内容制作阶段</p>
+            </div>
+
+            <div class="mb-10 ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">4. 交付初稿</h3>
+              <p class="text-gray-400">初版素材交付审核</p>
+            </div>
+
+            <div class="mb-10 ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">5. 修订</h3>
+              <p class="text-gray-400">根据反馈调整细节</p>
+            </div>
+
+            <div class="ml-6">
+              <div
+                class="absolute w-4 h-4 bg-yellow-400 rounded-full -left-2"></div>
+              <h3 class="text-xl font-bold mb-2">6. 最终交付与结算</h3>
+              <p class="text-gray-400">正式交付可投放素材，月底统一结算</p>
+            </div>
+          </div>
+          <p class="mt-8 text-gray-400 text-sm">
+            请至少提前一天提交素材需求以便排期。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section id="faq" class="py-20 bg-[#000610] relative overflow-hidden">
+      <div class="blob blob-1" style="left: 10%; top: 20%"></div>
+
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">FAQ</p>
+          <h2 class="text-3xl font-bold section-title">常见问题</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <div class="faq-item p-6 mb-6">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">
+              Q：服务时间？
+            </h3>
+            <p class="text-gray-300">A：周一至周六提供商务与制作服务。</p>
+          </div>
+
+          <div class="faq-item p-6 mb-6">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">
+              Q：如何结算？
+            </h3>
+            <p class="text-gray-300">
+              A：支持 U
+              支付；采用"素材先用后付"模式，最终按月结算（次月月底结账）。
+            </p>
+          </div>
+
+          <div class="faq-item p-6 mb-6">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">
+              Q：项目需要多长时间？
+            </h3>
+            <p class="text-gray-300">
+              A：视素材类型与数量而定，请至少提前一天提交需求以便排期。
+            </p>
+          </div>
+
+          <div class="faq-item p-6">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">
+              Q：海外演员与拍摄如何安排？
+            </h3>
+            <p class="text-gray-300">
+              A：我们在目标地区有本地化团队，负责演员甄选、拍摄与翻译。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+      <div class="blob blob-2" style="left: 70%; top: 10%"></div>
+
+      <div class="container mx-auto px-4 content-wrapper">
+        <div class="text-center mb-16">
+          <p class="title-decoration">CONTACT US</p>
+          <h2 class="text-3xl font-bold section-title">联系我们</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="text-xl mb-8 text-gray-300">
+            想开始项目或获取定制报价？联系我们的商务团队：
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div class="contact-card p-6">
+              <div class="text-3xl mb-4 text-yellow-400">
+                <i class="fab fa-telegram"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Telegram</h3>
+              <p class="text-lg">@Salamanca888</p>
+            </div>
+
+            <div class="contact-card p-6">
+              <div class="text-3xl mb-4 text-yellow-400">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">邮箱</h3>
+              <p class="text-lg">salamanca9966@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="mb-8 text-gray-300">
+            <p class="text-lg mb-2">服务时间：周一 ~ 周六</p>
+            <p class="text-lg mb-2">
+              支付/结算：支持 U 支付；素材先用后付，次月月底结账
+            </p>
+            <p class="text-lg">服务区域：东南亚 · 欧美 · 中东 · 拉美</p>
+          </div>
+
+          <a
+            href="https://t.me/Salamanca888"
+            target="_blank"
+            class="inline-block bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-yellow-300 transition duration-300">
+            立即合作
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-[#000610] text-white py-8 border-t border-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-center items-center">
+          <div class="mb-4 md:mb-0 text-center">
+            <p class="text-lg">© 2025 Salamanca. All Rights Reserved.</p>
+            <p class="text-gray-400 mt-2">
+              专业出海广告内容制作 | 图片 · 视频 · 动画 · 落地页 · 真人拍摄 ·
+              KOL
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 导航栏滚动显示/隐藏
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        if (window.scrollY > 100) {
+          header.classList.remove("header-hidden");
+          header.classList.add("header-visible");
+        } else {
+          header.classList.remove("header-visible");
+          header.classList.add("header-hidden");
+        }
+      });
+
+      // 移动端菜单切换
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobile-menu");
+          mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+  </body>
+</html>
