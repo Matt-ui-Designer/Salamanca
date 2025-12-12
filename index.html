@@ -159,6 +159,112 @@
         letter-spacing: 2px;
         margin-bottom: 5px;
       }
+
+      /* 增强卡片样式 */
+      .enhanced-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* 光晕扫过效果 */
+      .enhanced-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg, 
+          transparent, 
+          rgba(16, 185, 129, 0.1), 
+          rgba(59, 130, 246, 0.1), 
+          transparent
+        );
+        transition: left 0.8s ease;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .enhanced-card:hover::before {
+        left: 100%;
+      }
+
+      /* 额外的光晕效果 */
+      .card-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(16, 185, 129, 0.1) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .enhanced-card:hover .card-glow {
+        opacity: 1;
+      }
+
+      /* 卡片悬停效果 */
+      .enhanced-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 
+          0 20px 40px rgba(0, 0, 0, 0.3),
+          0 0 40px rgba(16, 185, 129, 0.1);
+        border-color: rgba(59, 130, 246, 0.3);
+      }
+
+      /* 图标动画 */
+      .card-icon {
+        transition: all 0.3s ease;
+      }
+
+      .enhanced-card:hover .card-icon {
+        transform: scale(1.1);
+        color: #3b82f6; /* 悬停时变为蓝色 */
+        filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+      }
+
+      /* 标题悬停效果 */
+      .enhanced-card:hover .text-xl {
+        color: #10b981; /* 悬停时标题变为绿色 */
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+      }
+
+      /* 底部装饰线 */
+      .card-decoration {
+        background: linear-gradient(90deg, #10b981, #3b82f6);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.6s ease;
+        z-index: 10;
+      }
+
+      .enhanced-card:hover .card-decoration {
+        transform: scaleX(1);
+      }
+
+      /* 描述内容动画 */
+      .card-extra-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+
+      .enhanced-card:hover .card-extra-content {
+        max-height: 200px;
+      }
+
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .enhanced-card:hover {
+          transform: translateY(-5px);
+        }
+      }
     </style>
   </head>
   <body>
@@ -289,6 +395,14 @@
           立即合作
         </a>
       </div>
+
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 fade-in-up"
+        style="transition-delay: 0.5s">
+        <div class="text-yellow-400 animate-bounce">
+          <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+      </div>
     </section>
 
     <!-- 我们是谁 -->
@@ -320,8 +434,10 @@
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
             <div
               class="p-8 flex flex-col justify-center items-center text-center h-full">
               <div class="flex items-center py-4">
@@ -338,10 +454,13 @@
                 测试。每张图片均以提升点击率和转化率为核心指标，通过数据反馈不断迭代
               </p>
             </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
           </div>
 
-          <div
-            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
             <div
               class="p-8 flex flex-col justify-center items-center text-center h-full">
               <div class="flex items-center py-4">
@@ -358,10 +477,13 @@
                 ROI
               </p>
             </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
           </div>
 
-          <div
-            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
             <div
               class="p-8 flex flex-col justify-center items-center text-center h-full">
               <div class="flex items-center py-4">
@@ -376,10 +498,13 @@
                 全球本地化团队进行广告实拍，提供剧本、演员、翻译及后期一站式服务。内容针对各地文化和广告审查优化，配合大媒体投放数据，提升素材转化效果
               </p>
             </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
           </div>
 
-          <div
-            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
             <div
               class="p-8 flex flex-col justify-center items-center text-center h-full">
               <div class="flex items-center py-4">
@@ -394,10 +519,13 @@
                 针对广告投放制作高转化落地页，支持多语言与地域跳转。设计和布局经过大数据分析优化，确保广告流量有效转化为潜在用户或订单
               </p>
             </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
           </div>
 
-          <div
-            class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:-translate-y-2 bg-black bg-opacity-50 backdrop-blur-md">
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
             <div
               class="p-8 flex flex-col justify-center items-center text-center h-full">
               <div class="flex items-center py-4">
@@ -412,7 +540,30 @@
                 利用东南亚、中东、欧美、拉美等地区达人资源，进行脚本指导和投放配合。结合广告数据分析选择最优达人，提高品牌曝光和广告转化率
               </p>
             </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
           </div>
+
+          <div class="enhanced-card group rounded-2xl overflow-hidden cursor-pointer transition-all duration-400 bg-gradient-to-br from-gray-900/70 to-gray-800/70 backdrop-blur-md border border-gray-700/30 relative">
+            <div class="absolute inset-0 z-0 overflow-hidden">
+              <div class="card-glow"></div>
+            </div>
+            <div
+              class="p-8 flex flex-col justify-center items-center text-center h-full">
+              <div class="flex items-center py-4">
+                <i
+                  class="fas fa-building text-green-500 text-4xl mr-4 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold">线下推广</h3>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 bg-black bg-opacity-90 text-gray-300 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center">
+              <p>
+                我们提供印尼、泰国等本地媒体投放，包括电梯广告、商场大屏、户外OOH及公交车广告，帮助品牌快速触达目标用户
+              </p>
+            </div>
+            <div class="card-decoration absolute bottom-0 left-0 w-full h-1"></div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -819,8 +970,104 @@
           const mobileMenu = document.getElementById("mobile-menu");
           mobileMenu.classList.toggle("hidden");
         });
+
+        // 增强卡片交互效果
+      document.addEventListener('DOMContentLoaded', function() {
+        const enhancedCards = document.querySelectorAll('.enhanced-card');
+        
+        enhancedCards.forEach(card => {
+          // 点击效果
+          card.addEventListener('click', function() {
+            // 添加点击动画
+            this.style.transform = 'translateY(-10px) scale(0.98)';
+            
+            setTimeout(() => {
+              this.style.transform = 'translateY(-10px)';
+            }, 150);
+            
+            // 可以添加其他点击效果，比如显示模态框等
+            console.log('卡片被点击:', this.querySelector('h3').textContent);
+          });
+          
+          // 触摸设备交互
+          let touchStartY = 0;
+          let touchEndY = 0;
+          
+          card.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+            this.style.transform = 'translateY(-5px)';
+          });
+          
+          card.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            
+            // 判断是否为轻扫
+            if (Math.abs(touchEndY - touchStartY) < 10) {
+              // 轻触效果
+              this.style.transform = 'translateY(-10px)';
+              
+              // 模拟点击事件
+              this.click();
+            } else {
+              this.style.transform = '';
+            }
+          });
+          
+          // 键盘导航支持
+          card.addEventListener('focus', function() {
+            this.classList.add('keyboard-focus');
+          });
+          
+          card.addEventListener('blur', function() {
+            this.classList.remove('keyboard-focus');
+          });
+          
+          // 按Enter键触发点击
+          card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.click();
+            }
+          });
+        });
+        
+        // 添加键盘焦点样式
+        const style = document.createElement('style');
+        style.textContent = `
+          .enhanced-card.keyboard-focus {
+            outline: 3px solid #10b981;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+          }
+          
+          /* 悬停时边框动画 */
+          .enhanced-card {
+            position: relative;
+          }
+          
+          .enhanced-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 1px;
+            background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          
+          .enhanced-card:hover::after {
+            opacity: 1;
+          }
+        `;
+        document.head.appendChild(style);
+      });
     </script>
   </body>
 </html>
+
 
 
